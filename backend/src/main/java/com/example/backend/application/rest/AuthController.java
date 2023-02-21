@@ -38,7 +38,6 @@ public class AuthController {
   @PostMapping("/login")
   public ResponseEntity<LoginResponse> login(@RequestBody LoginRequest loginRequest) {
     try {
-      System.out.println("here");
       authenticationManager.authenticate(
           new UsernamePasswordAuthenticationToken(loginRequest.getUsername(),
               loginRequest.getPassword()));
@@ -50,7 +49,6 @@ public class AuthController {
     if (!user.isPresent()) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-    System.out.println(user.get().getUsername());
     LoginResponse loginResponse = new LoginResponse();
     // TODO: Generate token
     loginResponse.setToken("token");
@@ -61,8 +59,9 @@ public class AuthController {
   public ResponseEntity<String> register(@RequestBody User user) {
     try {
       userService.register(user);
-      return ResponseEntity.status(HttpStatus.OK).build();
+      return ResponseEntity.status(HttpStatus.CREATED).build();
     } catch (Exception e) {
+      e.printStackTrace();
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
   }

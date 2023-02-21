@@ -43,7 +43,6 @@ public class SecurityConfig {
    */
   @Bean
   public AuthenticationManager authenticationManager(final AuthenticationConfiguration configuration) throws Exception {
-    System.out.println("here");
     return configuration.getAuthenticationManager();
   }
 
