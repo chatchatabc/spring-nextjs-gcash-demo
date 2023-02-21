@@ -29,10 +29,6 @@ public class SecurityConfig {
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/login", "/register").permitAll()
             .anyRequest().authenticated())
-        // .formLogin().loginPage("/login")
-        // .and()
-        // .logout().logoutUrl("/logout").logoutSuccessUrl("/login")
-        // .and()
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         // TODO: Add JwtRequestFilter
         .build();
@@ -47,6 +43,7 @@ public class SecurityConfig {
    */
   @Bean
   public AuthenticationManager authenticationManager(final AuthenticationConfiguration configuration) throws Exception {
+    System.out.println("here");
     return configuration.getAuthenticationManager();
   }
 
