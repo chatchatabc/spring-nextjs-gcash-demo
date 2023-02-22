@@ -53,9 +53,8 @@ public class AuthController {
     if (!user.isPresent()) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
-    LoginResponse loginResponse = new LoginResponse();
     String token = jwtService.generateToken(user.get());
-    loginResponse.setToken(token);
+    LoginResponse loginResponse = new LoginResponse(token);
     return ResponseEntity.ok(loginResponse);
   }
 
