@@ -1,0 +1,61 @@
+### Get Products as admin
+GET {{address}}/products
+Authorization: {{token}}
+
+### Get Products as guest
+GET {{address}}/products
+Authorization: {{guest_token}}
+
+### Create a Product
+POST {{address}}/products/admin/create
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "name": "Product Name",
+  "description": "Product Description",
+  "imageUrl": "https://veronikaskitchen.com/wp-content/uploads/2020/07/20200705-IMG_3634-500x500.jpg",
+  "price": 100,
+  "quantity": 10
+}
+
+### Update a Product
+PUT {{address}}/products/admin/update
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "id": 1,
+  "name": "Product Name1",
+  "description": "Product Description1",
+  "imageUrl": "https://veronikaskitchen.com/wp-content/uploads/2020/07/20200705-IMG_3634-500x500.jpg",
+  "price": 102,
+  "quantity": 12
+}
+
+### Delete a Product
+DELETE {{address}}/products/admin/delete
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+### Restore a Product
+PUT {{address}}/products/admin/restore
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "id": 1
+}
+
+### Toggle Product Available Status
+PUT {{address}}/products/admin/set-available
+Authorization: {{token}}
+Content-Type: application/json
+
+{
+  "id": 1
+}

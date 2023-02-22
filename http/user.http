@@ -1,4 +1,5 @@
-### User Login
+### Admin User
+### Admin Login
 POST {{address}}/login
 Content-Type: application/json
 
@@ -7,12 +8,32 @@ Content-Type: application/json
   "password": "123"
 }
 
-### User Register
+### Admin Register
 POST {{address}}/register
 Content-Type: application/json
 
 {
   "username": "Raphile",
   "email": "rllddalangin@gmail.com",
+  "password": "123"
+}
+
+### Guest User
+### Guest Login
+POST {{address}}/login
+Content-Type: application/json
+
+{
+  "username": "Carry",
+  "password": "123"
+}
+
+### Guest Register
+POST {{address}}/register
+Content-Type: application/json
+
+{
+  "username": "Carry",
+  "email": "dalanginraphael@gmail.com",
   "password": "123"
 }

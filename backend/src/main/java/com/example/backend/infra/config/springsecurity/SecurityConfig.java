@@ -35,6 +35,9 @@ public class SecurityConfig {
         .cors().and().csrf().disable()
         .authorizeHttpRequests(auth -> auth
             .requestMatchers("/login", "/register").permitAll()
+            // Products endpoints
+            .requestMatchers("/products/admin/**").hasRole("ADMIN")
+            .requestMatchers("/products/**").hasAnyRole("ADMIN", "GUEST")
             .anyRequest().authenticated())
         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
         .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class)
