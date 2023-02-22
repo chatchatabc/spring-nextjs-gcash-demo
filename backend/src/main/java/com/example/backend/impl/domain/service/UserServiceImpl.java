@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
    * @return
    */
   private User setUserIntialRole(User _user) {
-    System.out.println("here");
     if (userRepository.count() == 0) {
       Role role = roleRepository.findByName("ROLE_ADMIN");
       _user.setRoles(Set.of(role));

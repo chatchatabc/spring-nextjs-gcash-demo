@@ -15,6 +15,7 @@ import com.example.backend.application.dto.LoginRequest;
 import com.example.backend.application.dto.LoginResponse;
 import com.example.backend.domain.model.User;
 import com.example.backend.domain.repository.UserRepository;
+import com.example.backend.domain.service.JwtService;
 import com.example.backend.domain.service.UserService;
 
 @RestController
@@ -28,6 +29,9 @@ public class AuthController {
 
   @Autowired
   private UserRepository userRepository;
+
+  @Autowired
+  JwtService jwtService;
 
   /**
    * Login API
@@ -50,8 +54,8 @@ public class AuthController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     LoginResponse loginResponse = new LoginResponse();
-    // TODO: Generate token
-    loginResponse.setToken("token");
+    String token = jwtService.generateToken(user.get());
+    loginResponse.setToken(token);
     return ResponseEntity.ok(loginResponse);
   }
 
