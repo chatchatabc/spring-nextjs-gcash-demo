@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Logout from './Logout';
 
 export default function Navbar() {
   return (
@@ -22,14 +23,14 @@ export default function Navbar() {
           </li>
           {/* TODO: Show only if user is an admin */}
           <li className='pl-4'>
-            <Link href='/admin'>Dashboard</Link>
+            <Link href='/admin'>Admin</Link>
           </li>
           {/* TODO: Show only if user is logged in */}
           <li className='pl-4'>
             <Link href='/profile'>Profile</Link>
           </li>
           <li className='pl-4'>
-            <Link href='/logout'>Logout</Link>
+            <Logout />
           </li>
         </ul>
       </div>
