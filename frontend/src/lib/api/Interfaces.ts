@@ -18,7 +18,8 @@ export interface ILoginUser {
 /**
  * Create Product interface
  */
-export interface ICreateProduct {
+export interface IProduct {
+  id?: number;
   name: string;
   description: string;
   price: number;

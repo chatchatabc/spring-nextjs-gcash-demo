@@ -2,9 +2,11 @@
 
 import { FormResponse } from '@/lib/api/Interfaces';
 import { createProduct } from '@/lib/api/Product';
-import { FormEvent, useRef, useState } from 'react';
+import { Dispatch, FormEvent, SetStateAction, useRef, useState } from 'react';
 
-export default function CreateProduct() {
+export default function CreateProduct(params: {
+  setUpdate: Dispatch<SetStateAction<boolean>>;
+}) {
   // States
   const [status, setStatus] = useState<FormResponse>(FormResponse.IDLE);
 
@@ -26,6 +28,8 @@ export default function CreateProduct() {
       quantity: parseInt(quantity.current?.value!),
       imageUrl: imageUrl.current?.value!,
     });
+
+    params.setUpdate(true);
 
     console.log(res);
   };
@@ -89,7 +93,7 @@ export default function CreateProduct() {
       <div className='pt-4 w-full px-4'>
         <input
           className='border border-gray-500 rounded-md py-2 px-2 w-full'
-          type='number'
+          type='text'
           name='imageUrl'
           placeholder='Image Url'
           ref={imageUrl}
