@@ -3,19 +3,25 @@
 import Link from 'next/link';
 import Logout from './Logout';
 import Cookies from 'js-cookie';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function Navbar() {
-  // Get username from local storage
-  const username = localStorage.getItem('username');
-  // Get email from local storage
-  const email = localStorage.getItem('email');
-  // Get Roles from local storage
-  const authorities = localStorage.getItem('authorities');
-
   // States
+  const [username, setUsername] = useState<string | null>(null);
+  const [email, setEmail] = useState<string | null>(null);
+  const [authorities, setAuthorities] = useState<string | null>(null);
   // Check if token cookie exists
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!Cookies.get('token'));
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+  useEffect(() => {
+    // Get username from local storage
+    setUsername(localStorage.getItem('username'));
+    // Get email from local storage
+    setEmail(localStorage.getItem('email'));
+    // Get Roles from local storage
+    setAuthorities(localStorage.getItem('authorities'));
+    setIsLoggedIn(!!Cookies.get('token'));
+  }, []);
 
   return (
     <nav className='flex flex-wrap items-center justify-between mx-auto py-4 px-8 border border-b-4 shadow-sm mb-6'>
@@ -41,8 +47,8 @@ export default function Navbar() {
               </li>
             </>
           )}
-          {/* TODO: Show only if user is an admin */}
-          {authorities === 'ROLE_ADMIN' && (
+          {/* Show only if user is an admin */}
+          {isLoggedIn && authorities === 'ROLE_ADMIN' && (
             <li className='pl-4'>
               <Link href='/admin'>Admin</Link>
             </li>

@@ -7,7 +7,18 @@ export function middleware(request: NextRequest) {
   let cookies = request.cookies.getAll();
   console.log(cookies);
   console.log('here', request.url);
-  // return NextResponse.redirect(new URL('/', request.url));
+
+  const isLoggedIn = !!request.cookies.get('token');
+
+  // Redirect based on user's login status
+  const authPages = ['/admin', '/profile'];
+  const nonAuthPages = ['/login', '/register'];
+  const isAuthPage = authPages.includes(request.nextUrl.pathname);
+  if (isAuthPage && !isLoggedIn) {
+    return NextResponse.rewrite(new URL('/login', request.url));
+  } else if (nonAuthPages.includes(request.nextUrl.pathname) && isLoggedIn) {
+    return NextResponse.redirect(new URL('/', request.url));
+  }
   return NextResponse.next();
 }
 
