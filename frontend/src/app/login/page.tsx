@@ -2,8 +2,8 @@
 
 import { FormResponse } from '@/lib/api/Interfaces';
 import { loginUser } from '@/lib/api/User';
-import { FormEvent, useRef, useState } from 'react';
 import Cookies from 'js-cookie';
+import { FormEvent, useRef, useState } from 'react';
 
 export default function Login() {
   // References
@@ -26,7 +26,14 @@ export default function Login() {
     // Succcessful login
     if (res.status === 200) {
       setStatus(FormResponse.SUCCESS);
+      // Set token cookie
       Cookies.set('token', res.data.token);
+      // Set Username Localstorage
+      localStorage.setItem('username', res.data.username);
+      // Set Email Localstorage
+      localStorage.setItem('email', res.data.email);
+      // Set Authorities
+      localStorage.setItem('authorities', res.data.authorities[0].authority);
       // Redirect to home page
       window.location.href = '/';
       return;

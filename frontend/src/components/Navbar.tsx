@@ -1,7 +1,22 @@
+'use client';
+
 import Link from 'next/link';
 import Logout from './Logout';
+import Cookies from 'js-cookie';
+import { useState } from 'react';
 
 export default function Navbar() {
+  // Get username from local storage
+  const username = localStorage.getItem('username');
+  // Get email from local storage
+  const email = localStorage.getItem('email');
+  // Get Roles from local storage
+  const authorities = localStorage.getItem('authorities');
+
+  // States
+  // Check if token cookie exists
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(!!Cookies.get('token'));
+
   return (
     <nav className='flex flex-wrap items-center justify-between mx-auto py-4 px-8 border border-b-4 shadow-sm mb-6'>
       <div>
@@ -14,24 +29,36 @@ export default function Navbar() {
           <li className='pl-4'>
             <Link href='/'>Home</Link>
           </li>
-          {/* TODO: Show only if user is not logged in */}
-          <li className='pl-4'>
-            <Link href='/login'>Login</Link>
-          </li>
-          <li className='pl-4'>
-            <Link href='/register'>Register</Link>
-          </li>
+
+          {/* Show only if user is not logged in */}
+          {!isLoggedIn && (
+            <>
+              <li className='pl-4'>
+                <Link href='/login'>Login</Link>
+              </li>
+              <li className='pl-4'>
+                <Link href='/register'>Register</Link>
+              </li>
+            </>
+          )}
           {/* TODO: Show only if user is an admin */}
-          <li className='pl-4'>
-            <Link href='/admin'>Admin</Link>
-          </li>
-          {/* TODO: Show only if user is logged in */}
-          <li className='pl-4'>
-            <Link href='/profile'>Profile</Link>
-          </li>
-          <li className='pl-4'>
-            <Logout />
-          </li>
+          {authorities === 'ROLE_ADMIN' && (
+            <li className='pl-4'>
+              <Link href='/admin'>Admin</Link>
+            </li>
+          )}
+
+          {/* Show only if user is logged in */}
+          {isLoggedIn && (
+            <>
+              <li className='pl-4'>
+                <Link href='/profile'>Profile</Link>
+              </li>
+              <li className='pl-4'>
+                <Logout setIsLoggedIn={setIsLoggedIn} />
+              </li>
+            </>
+          )}
         </ul>
       </div>
     </nav>
