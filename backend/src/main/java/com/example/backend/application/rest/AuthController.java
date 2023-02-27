@@ -54,7 +54,8 @@ public class AuthController {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
     }
     String token = jwtService.generateToken(user.get());
-    LoginResponse loginResponse = new LoginResponse(token);
+    LoginResponse loginResponse = new LoginResponse(token, user.get().getUsername(),
+        user.get().getEmail(), user.get().getAuthorities());
     return ResponseEntity.ok(loginResponse);
   }
 
