@@ -1,4 +1,4 @@
-import axios from 'axios';
+import instance from './Config';
 
 /**
  * Axios get method
@@ -8,7 +8,7 @@ import axios from 'axios';
  * @returns
  */
 export function getAction(url: string, params: Object) {
-  return axios({
+  return instance({
     method: 'get',
     url: url,
     data: params,
@@ -23,7 +23,7 @@ export function getAction(url: string, params: Object) {
  * @returns
  */
 export function postAction(url: string, params: Object) {
-  return axios({
+  return instance({
     method: 'post',
     url: url,
     data: params,
@@ -38,7 +38,7 @@ export function postAction(url: string, params: Object) {
  * @returns
  */
 export function putAction(url: string, params: Object) {
-  return axios({
+  return instance({
     method: 'put',
     url: url,
     data: params,
@@ -53,7 +53,7 @@ export function putAction(url: string, params: Object) {
  * @returns
  */
 export function deleteAction(url: string, params: Object) {
-  return axios({
+  return instance({
     method: 'delete',
     url: url,
     data: params,

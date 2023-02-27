@@ -5,6 +5,7 @@ import { registerUser } from '@/lib/api/User';
 import { FormEvent, useRef, useState } from 'react';
 
 export default function Register() {
+  // References
   const email = useRef<HTMLInputElement>(null);
   const username = useRef<HTMLInputElement>(null);
   const password = useRef<HTMLInputElement>(null);
