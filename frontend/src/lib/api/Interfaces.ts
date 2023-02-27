@@ -1,5 +1,5 @@
 /**
- * User interface
+ * Register User interface
  */
 export interface IRegisterUser {
   email: string;
@@ -7,9 +7,23 @@ export interface IRegisterUser {
   password: string;
 }
 
+/**
+ * Login User interface
+ */
 export interface ILoginUser {
   username: string;
   password: string;
+}
+
+/**
+ * Create Product interface
+ */
+export interface ICreateProduct {
+  name: string;
+  description: string;
+  price: number;
+  imageUrl: string;
+  quantity: number;
 }
 
 export enum FormResponse {
