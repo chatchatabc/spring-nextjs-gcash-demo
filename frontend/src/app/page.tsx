@@ -1,3 +1,9 @@
+import ListAvailableProducts from './ListAvailableProducts';
+
 export default function Home() {
-  return <h1>Index</h1>;
+  return (
+    <div className='px-8'>
+      <ListAvailableProducts />
+    </div>
+  );
 }

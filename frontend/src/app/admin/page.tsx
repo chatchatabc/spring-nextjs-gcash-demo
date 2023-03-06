@@ -1,7 +1,7 @@
 'use client';
 
 import CreateProduct from '@/components/product/CreateProduct';
-import ListProducts from '@/components/product/ListProducts';
+import ListProducts from '@/app/admin/ListProducts';
 import { useState } from 'react';
 
 export default function Admin() {

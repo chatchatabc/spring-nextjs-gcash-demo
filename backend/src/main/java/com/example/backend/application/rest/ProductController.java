@@ -33,6 +33,12 @@ public class ProductController {
     return ResponseEntity.ok(products);
   }
 
+  @GetMapping("/available")
+  public ResponseEntity<Page<Product>> getAvailableProducts(Pageable pageable) {
+    Page<Product> products = productRepository.findByIsAvailableTrue(pageable);
+    return ResponseEntity.ok(products);
+  }
+
   /**
    * Create a product
    * 

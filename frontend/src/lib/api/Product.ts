@@ -9,6 +9,14 @@ export const getProducts = (params: any) =>
   getAction(`${process.env.NEXT_PUBLIC_API}/products`, params);
 
 /**
+ * Get available products
+ * @param params
+ * @returns
+ */
+export const getAvailableProducts = (params: any) =>
+  getAction(`${process.env.NEXT_PUBLIC_API}/products/available`, params);
+
+/**
  * Create product
  * @param params
  * @returns
