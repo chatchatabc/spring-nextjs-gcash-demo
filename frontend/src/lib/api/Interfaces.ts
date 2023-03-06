@@ -25,6 +25,7 @@ export interface IProduct {
   price: number;
   imageUrl: string;
   quantity: number;
+  isAvailable?: boolean;
 }
 
 export enum FormResponse {

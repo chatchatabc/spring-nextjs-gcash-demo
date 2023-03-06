@@ -1,6 +1,6 @@
 'use client';
 
-import CreateProduct from '@/components/product/CreateProduct';
+import CreateProduct from '@/app/admin/CreateProduct';
 import ListProducts from '@/app/admin/ListProducts';
 import { useState } from 'react';
 

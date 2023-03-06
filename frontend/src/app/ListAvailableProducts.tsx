@@ -72,7 +72,7 @@ export default function ListAvailableProducts() {
         >
           Previous
         </Link>
-        <div>Page: {page.number + 1}</div>
+        {page && <div>Page: {page.number + 1}</div>}
         <Link
           aria-disabled={page.last}
           href={

@@ -1,5 +1,5 @@
 import { IProduct } from './Interfaces';
-import { getAction, postAction } from './Manager';
+import { getAction, postAction, putAction } from './Manager';
 
 /**
  * Get products
@@ -23,3 +23,15 @@ export const getAvailableProducts = (params: any) =>
  */
 export const createProduct = (params: IProduct) =>
   postAction(`${process.env.NEXT_PUBLIC_API}/products/admin/create`, params);
+
+/**
+ * Toggle product availbility
+ * @param id
+ * @returns
+ */
+export const toggleProductAvailability = (id: number) => {
+  return putAction(
+    `${process.env.NEXT_PUBLIC_API}/products/admin/set-available`,
+    { id }
+  );
+};
