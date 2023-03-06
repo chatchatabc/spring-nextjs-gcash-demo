@@ -1,0 +1,27 @@
+{
+  "data": {
+    "id": "pi_qfQhnQKstrcqZ2RxHcmqspyv",
+    "type": "payment_intent",
+    "attributes": {
+      "amount": 10000,
+      "capture_type": "automatic",
+      "client_key": "pi_qfQhnQKstrcqZ2RxHcmqspyv_client_XrJTfSwqHXbWxYrLKqoKV2b6",
+      "currency": "PHP",
+      "description": "description",
+      "livemode": false,
+      "statement_descriptor": "descriptor",
+      "status": "awaiting_payment_method",
+      "last_payment_error": null,
+      "payment_method_allowed": [
+        "gcash"
+      ],
+      "payments": [],
+      "next_action": null,
+      "payment_method_options": null,
+      "metadata": null,
+      "setup_future_usage": null,
+      "created_at": 1678083938,
+      "updated_at": 1678083938
+    }
+  }
+}

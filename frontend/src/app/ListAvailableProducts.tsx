@@ -1,6 +1,7 @@
 'use client';
 
 import { IProduct } from '@/lib/api/Interfaces';
+import { createPayment } from '@/lib/api/Payment';
 import { getAvailableProducts } from '@/lib/api/Product';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
@@ -10,6 +11,12 @@ export default function ListAvailableProducts() {
   const [products, setProducts] = useState<IProduct[]>([]);
   const [page, setPage] = useState<any>({});
   const searchParams = useSearchParams();
+
+  const purchaseProduct = async (id: number) => {
+    console.log('purchase product id: ' + id);
+    const res = await createPayment({ id, data: 'test' });
+    console.log(res);
+  };
 
   useEffect(() => {
     const getProductsAPI = async () => {
@@ -52,6 +59,12 @@ export default function ListAvailableProducts() {
                 Quantity:{' '}
                 {product.quantity > 0 ? product.quantity : 'Out of Stock'}
               </p>
+              <button
+                onClick={() => purchaseProduct(product.id!)}
+                className='my-4 bg-blue-500 rounded-md py-2 px-4 text-white uppercase'
+              >
+                Buy with Gcash
+              </button>
             </div>
           </div>
         ))}

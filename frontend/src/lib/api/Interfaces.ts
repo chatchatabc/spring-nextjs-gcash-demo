@@ -28,6 +28,11 @@ export interface IProduct {
   isAvailable?: boolean;
 }
 
+export interface IPayment {
+  id?: number;
+  data: string;
+}
+
 export enum FormResponse {
   IDLE = 'idle',
   LOADING = 'loading',

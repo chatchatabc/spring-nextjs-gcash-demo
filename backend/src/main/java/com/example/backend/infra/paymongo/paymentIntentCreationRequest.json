@@ -1,0 +1,19 @@
+{
+  "data": {
+    "attributes": {
+      "amount": 10000,
+      "payment_method_allowed": [
+        "gcash"
+      ],
+      "payment_method_options": {
+        "card": {
+          "request_three_d_secure": "any"
+        }
+      },
+      "currency": "PHP",
+      "capture_type": "automatic",
+      "description": "description",
+      "statement_descriptor": "descriptor"
+    }
+  }
+}

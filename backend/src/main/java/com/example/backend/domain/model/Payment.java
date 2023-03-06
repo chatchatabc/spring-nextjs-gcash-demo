@@ -7,7 +7,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.PrePersist;
+import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,49 +22,45 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@Table(name = "products")
-public class Product {
+@Table(name = "payments")
+public class Payment {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column
-  private String name;
+  @ManyToOne
+  @JoinColumn(name = "user_id", referencedColumnName = "id")
+  private User user;
+
+  @ManyToOne
+  @JoinColumn(name = "product_id", referencedColumnName = "id")
+  private Product product;
 
   @Column
-  private String description;
+  private String paymentId;
 
   @Column
-  private String imageUrl;
+  private String clientKey;
 
   @Column
-  private Double price;
-
-  @Column
-  private Integer quantity;
-
-  @Column
-  private Boolean isAvailable;
-
-  @Column
-  private Boolean isDeleted;
+  private String status;
 
   @Column
   private Instant createdAt;
+
+  @Column
+  private Instant updatedAt;
 
   // Persists
   @PrePersist
   protected void onCreate() {
     this.createdAt = Instant.now();
-    this.isAvailable = true;
-    this.isDeleted = false;
+    this.updatedAt = Instant.now();
   }
 
-  /**
-   * Formats price to be sent to paymongo
-   */
-  public int formatPrice() {
-    Double multiplied = this.price * 100;
-    return multiplied.intValue();
+  // PreUpdates
+  @PreUpdate
+  protected void onUpdate() {
+    this.updatedAt = Instant.now();
   }
 }
