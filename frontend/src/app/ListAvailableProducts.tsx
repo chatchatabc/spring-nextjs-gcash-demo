@@ -27,7 +27,9 @@ export default function ListAvailableProducts() {
 
   return (
     <div>
-      <h1 className='text-3xl font-semibold'>Products for Sale</h1>
+      <h1 className='text-3xl font-semibold'>
+        Products for Sale (Total: {page ? page.totalElements : '0'})
+      </h1>
 
       <div className='grid grid-cols-2 w-full mx-auto'>
         {products.map((product) => (
@@ -45,8 +47,11 @@ export default function ListAvailableProducts() {
             <div className='flex-1 p-4'>
               <h1 className='text-xl font-semibold'>Name: {product.name}</h1>
               <p className='text-sm'>Description: {product.description}</p>
-              <p className='text-sm'>Price: {product.price}</p>
-              <p className='text-sm'>Quantity: {product.quantity}</p>
+              <p className='text-sm'>Price: Php {product.price}</p>
+              <p className='text-sm'>
+                Quantity:{' '}
+                {product.quantity > 0 ? product.quantity : 'Out of Stock'}
+              </p>
             </div>
           </div>
         ))}
@@ -67,6 +72,7 @@ export default function ListAvailableProducts() {
         >
           Previous
         </Link>
+        <div>Page: {page.number + 1}</div>
         <Link
           aria-disabled={page.last}
           href={

@@ -33,7 +33,7 @@ export default function ListProducts(params: {
   return (
     <div className=''>
       <h1 className='text-2xl uppercase font-semibold text-center'>
-        Products (Total: {page.totalElements})
+        Products (Total: {page ? page.totalElements : '0'})
       </h1>
       <div className='grid grid-cols-2 w-full mx-auto'>
         {products.map((product) => (
@@ -73,6 +73,7 @@ export default function ListProducts(params: {
         >
           Previous
         </Link>
+        <div>Page: {page.number + 1}</div>
         <Link
           aria-disabled={page.last}
           href={
