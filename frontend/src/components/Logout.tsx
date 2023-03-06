@@ -10,7 +10,6 @@ export default function Logout(params: {
   const router = useRouter();
 
   const logout = () => {
-    console.log('logout');
     // Clear token cookie
     Cookies.remove('token');
     // Clear Username Localstorage

@@ -30,8 +30,6 @@ export default function CreateProduct(params: {
     });
 
     params.setUpdate(true);
-
-    console.log(res);
   };
 
   return (

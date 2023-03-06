@@ -8,11 +8,7 @@ import instance from './Config';
  * @returns
  */
 export function getAction(url: string, params: Object) {
-  return instance({
-    method: 'get',
-    url: url,
-    data: params,
-  });
+  return instance.get(url, { params });
 }
 
 /**

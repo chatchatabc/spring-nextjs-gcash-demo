@@ -2,6 +2,8 @@
 
 import { IProduct } from '@/lib/api/Interfaces';
 import { getProducts } from '@/lib/api/Product';
+import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 export default function ListProducts(params: {
@@ -9,20 +11,30 @@ export default function ListProducts(params: {
   update: boolean;
 }) {
   const [products, setProducts] = useState<IProduct[]>([]);
+  const [page, setPage] = useState<any>({});
+  const searchParams = useSearchParams();
 
   useEffect(() => {
     const getProductsAPI = async () => {
-      const res = await getProducts();
-      console.log(res);
+      // Get page from query
+      let currPage = searchParams.get('page') || 0;
+      let size = searchParams.get('size') || 10;
+
+      const res = await getProducts({ page: currPage, size });
       setProducts(res.data.content);
+      // Set page to res.data except content
+      const { content, ...page } = res.data;
+      setPage(page);
       params.setUpdate(false);
     };
     getProductsAPI();
-  }, [params.update]);
+  }, [params.update, searchParams]);
 
   return (
     <div className=''>
-      <h1 className='text-2xl uppercase font-semibold text-center'>Products</h1>
+      <h1 className='text-2xl uppercase font-semibold text-center'>
+        Products (Total: {page.totalElements})
+      </h1>
       <div className='grid grid-cols-2 w-full mx-auto'>
         {products.map((product) => (
           <div
@@ -44,6 +56,36 @@ export default function ListProducts(params: {
             </div>
           </div>
         ))}
+      </div>
+
+      {/* Pagination */}
+      <div className='flex justify-between py-8'>
+        <Link
+          aria-disabled={page.first}
+          href={
+            page.first
+              ? { pathname: '/admin', query: { page: page.number } }
+              : { pathname: '/admin', query: { page: page.number - 1 } }
+          }
+          className={`${
+            page.first ? 'bg-gray-500' : 'bg-blue-500'
+          } rounded-md py-2 px-4 text-white uppercase`}
+        >
+          Previous
+        </Link>
+        <Link
+          aria-disabled={page.last}
+          href={
+            page.last
+              ? { pathname: '/admin', query: { page: page.number } }
+              : { pathname: '/admin', query: { page: page.number + 1 } }
+          }
+          className={`${
+            page.last ? 'bg-gray-500' : 'bg-blue-500'
+          } rounded-md py-2 px-4 text-white uppercase`}
+        >
+          Next
+        </Link>
       </div>
     </div>
   );

@@ -21,8 +21,6 @@ export default function Login() {
       password: password.current?.value!,
     });
 
-    console.log(res);
-
     // Succcessful login
     if (res.status === 200) {
       setStatus(FormResponse.SUCCESS);
