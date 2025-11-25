@@ -1,1 +1,1 @@
-# spring-nextjs-gcash-demo
+# Free AI at api.airforce
